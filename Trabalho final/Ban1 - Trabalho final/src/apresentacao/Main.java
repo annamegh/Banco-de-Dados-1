@@ -2,6 +2,9 @@ package apresentacao;
 
 import negocio.Gerenciador;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +21,10 @@ public class Main {
 	Scanner scan = new Scanner(System.in);
 	Gerenciador g = new Gerenciador();
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		int op;
+        String formatoStringData = "yyyy-MM-dd";
 		
 		Main main = new Main();
 		System.out.println("Opções:\n1.Mostrar usuarios.\n2.Mostrar cartoes.\n3.Mostrar Redes.\n"
@@ -67,6 +71,11 @@ public class Main {
 				u.setCidade("Curitiba");
 				u.setEstado("Paraná");
 				u.setCpf("00100110022");
+				String stringData = "2023-11-27"; 
+	            SimpleDateFormat formato = new SimpleDateFormat(formatoStringData);
+	            java.util.Date utilDate = formato.parse(stringData);
+	            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+				u.setData_inclusao(sqlDate);
 				main.cadastrarUsuario(u, main.g);
 				break;
 			
